@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    
+    input[type="text"], input[type="email"], input[type="tel"], input[type="file"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      float: right;
+    }
+    
+    #registrationData {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Registration Form</h1>
+    <form id="registrationForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+      
+      <label for="mobile">Mobile:</label>
+      <input type="tel" id="mobile" required>
+      
+      <label for="course">Course:</label>
+      <select id="course" required>
+        <option value="">Select a course</option>
+        <option value="CSE">CSE</option>
+        <option value="ECE">ECE</option>
+        <option value="EEE">EEE</option>
+      </select>
+      
+      <label for="photo">Photo:</label>
+      <input type="file" id="photo" accept="image/*" required>
+      
+      <button type="submit">Register</button>
+    </form>
+
+    <div id="registrationData"></div>
+  </div>
+
+  <script>
+    var form = document.getElementById("registrationForm");
+    var registrationData = document.getElementById("registrationData");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var mobile = document.getElementById("mobile").value;
+      var course = document.getElementById("course").value;
+      var photo = document.getElementById("photo").files[0];
+
+      // Create an object to hold the form data
+      var formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("mobile", mobile);
+      formData.append("course", course);
+      formData.append("photo", photo);
+
+      // Display the form data
+      registrationData.innerHTML = `
+        <h2>Registration Data:</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Mobile:</strong> ${mobile}</p>
+        <p><strong>Course:</strong> ${course}</p>
+        <p><strong>Photo:</strong> ${photo.name}</p>
+      `;
+
+      // You can use the formData object to send the data to a server using AJAX or fetch API
+      // For example:
+      // fetch("/registration-endpoint", {
+      //   method: "POST",
+      //   body: formData
+      // })
+      // .then(response => response.json())
+      // .then(data => {
+      //   console.log(data);
+      // })
+      // .catch(error => {
+      //   console.error(error);
+      // });
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
