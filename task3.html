@@ -116,18 +116,18 @@
       `;
 
       // You can use the formData object to send the data to a server using AJAX or fetch API
-      // For example:
-      // fetch("/registration-endpoint", {
-      //   method: "POST",
-      //   body: formData
-      // })
-      // .then(response => response.json())
-      // .then(data => {
-      //   console.log(data);
-      // })
-      // .catch(error => {
-      //   console.error(error);
-      // });
+      
+       fetch("/registration-endpoint", {
+         method: "POST",
+         body: formData
+       })
+       .then(response => response.json())
+       .then(data => {
+         console.log(data);
+       })
+       .catch(error => {
+         console.error(error);
+       });
 
       form.reset();
     });
